@@ -30,7 +30,7 @@ function App() {
 
   return (
     <>
-      <div className='max-w-[1372px] flex justify-center py-10 h-screen bg-gradient-to-tr from-lime-100 to-slate-900 '>
+      <div className='max-w-[1372px] flex justify-center items-center py-10 h-screen bg-gradient-to-tr from-lime-100 to-slate-900 '>
         {
           (countryCodes.length) ? (
             <div className='shadow-md h-fit flex flex-col p-4 rounded-2xl bg-gradient-to-tr from-white to-black'>
