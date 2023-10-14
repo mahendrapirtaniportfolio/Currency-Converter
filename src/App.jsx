@@ -26,20 +26,32 @@ function App() {
 
   useEffect(() => {
     convertCurrency();
-  }, [from, to, fromValue, converstionRates])
+  }, [from, to, fromValue, converstionRates, setToValue])
+
+  const swap = () => {
+    const temp = from;
+    setFrom(prev => to);
+    setTo(prev => temp);
+  }
 
   return (
     <>
-      <div className='max-w-[1372px] flex justify-center items-center py-10 h-screen bg-gradient-to-tr from-lime-100 to-slate-900 '>
+      <div className='max-w-[1372px] flex justify-center items-center py-10 h-screen bg-gradient-to-tr from-lime-100 to-black '>
         {
           (countryCodes.length) ? (
-            <div className='shadow-md h-fit flex flex-col p-4 rounded-2xl bg-gradient-to-tr from-white to-black'>
+            <div className='shadow-2xl relative h-fit flex flex-col p-4 rounded-2xl bg-gradient-to-tr from-lime-300 to-slate-900'>
+              <button 
+                className='absolute bg-gradient-to-tr from-lime-500 to-black px-4 py-2 text-lg font-medium text-white rounded-md top-[55%] left-[56%] shadow-lg'
+                onClick={swap}
+              >
+                swap
+              </button>
               <h1 className='text-white shadow-sm text-center text-4xl font-bold py-2'> Currency Converter </h1>
               <CurrencyComponents 
                 value={fromValue} 
                 setValueMethod = {setFromValue} 
                 setFromMethod = {setFrom}
-                defaultValue = {from}
+                defaultValue = {{"defaultValue": from}}
                 isFrom = {true} 
                 converstionRates={converstionRates}
               />
@@ -47,9 +59,11 @@ function App() {
                   value={toValue} 
                   setValueMethod = {setToValue} 
                   setFromMethod = {setTo} 
-                  defaultValue = {to}
+                  defaultValue = {{"defaultValue": to}}
                   isFrom = {false} 
                   converstionRates={converstionRates}
+                  hasDisabled = {true}
+                  className = "bg-white"
                 />
             </div>
           ) : <Loader />
