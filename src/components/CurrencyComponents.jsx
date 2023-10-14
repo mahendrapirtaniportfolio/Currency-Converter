@@ -12,7 +12,7 @@ function CurrencyComponents({isFrom, value, defaultValue, setValueMethod, setFro
         />
         <select className='ml-4 p-4 rounded-md' defaultValue={defaultValue} onChange={e => setFromMethod(e.target.value)}>
             {
-            Object.keys(converstionRates).map(code => <option value = {code} key={code}>{code}</option>)
+            Object.keys(converstionRates).map(code => <option className="outline-none" value = {code} key={code}>{code}</option>)
             }
         </select>
     </div>

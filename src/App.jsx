@@ -30,11 +30,11 @@ function App() {
 
   return (
     <>
-      <div className='max-w-[1372px] flex justify-center py-10 h-screen bg-[url(assets/background.jpg)] bg-cover bg-center'>
+      <div className='max-w-[1372px] flex justify-center py-10 h-screen bg-gradient-to-tr from-lime-100 to-slate-900 '>
         {
           (countryCodes.length) ? (
-            <div className='shadow-lg flex flex-col'>
-              <h1 className='text-white text-center text-4xl font-bold py-2'> Currency Converter </h1>
+            <div className='shadow-md h-fit flex flex-col p-4 rounded-2xl bg-gradient-to-tr from-white to-black'>
+              <h1 className='text-white shadow-sm text-center text-4xl font-bold py-2'> Currency Converter </h1>
               <CurrencyComponents 
                 value={fromValue} 
                 setValueMethod = {setFromValue} 
