@@ -4,6 +4,7 @@ import CurrencyComponents from './components/CurrencyComponents'
 import Loader from './components/Loader'
 
 function App() {
+  const [loading, setLoading] = useState(false);
   const [from, setFrom] = useState('INR')
   const [fromValue, setFromValue] = useState(1)
   const [to, setTo] = useState('USD')
@@ -11,10 +12,14 @@ function App() {
   const [converstionRates, setConvertionRates] = useState({})
 
   useEffect(() => {
+    setLoading(true);
     fetch(`https://v6.exchangerate-api.com/v6/fda85281ecdb66810f56cbca/latest/${from}`)
     .then(response => response.json())
-    .then(res => setConvertionRates(res["conversion_rates"]));
-}, [from, to])
+    .then(res => {
+      setConvertionRates(res["conversion_rates"]);
+      setLoading(false);
+    })
+}, [from])
 
   const countryCodes = Object.keys(converstionRates);
   const convertCurrency = () => {
@@ -30,15 +35,15 @@ function App() {
 
   const swap = () => {
     const temp = from;
-    setFrom(prev => to);
-    setTo(prev => temp);
+    setFrom(to);
+    setTo(temp);
   }
 
   return (
     <>
       <div className='max-w-[1372px] flex justify-center items-center py-10 h-screen bg-gradient-to-tr from-lime-100 to-black '>
         {
-          (countryCodes.length) ? (
+          (countryCodes.length && !loading) ? (
             <div className='shadow-2xl relative h-fit flex flex-col p-4 rounded-2xl bg-gradient-to-tr from-lime-300 to-slate-900'>
               <button 
                 className='absolute bg-gradient-to-tr from-lime-500 to-black px-4 py-2 text-lg font-medium text-white rounded-md top-[55%] left-[56%] shadow-lg'
